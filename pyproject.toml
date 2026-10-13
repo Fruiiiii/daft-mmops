@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "daft-mmops"
+version = "0.1.0"
+description = "Multimodal data processing operators for Daft"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+dependencies = [
+    "pyarrow>=12",
+]
+
+[project.optional-dependencies]
+daft = ["daft>=0.7"]
+text = ["daft>=0.7"]
+image = []
+audio = []
+video = []
+document = []
+multimodal = []
+# Flattened union of text + image + audio + video + document + multimodal.
+# PEP 621 extras cannot directly include other extras by name.
+all = ["daft>=0.7"]
+test = [
+    "daft>=0.7",
+    "pytest>=7",
+]
+dev = [
+    "daft>=0.7",
+    "pytest>=7",
+    "black>=24",
+    "build>=1",
+    "twine>=5",
+]
+
+[project.urls]
+Source = "https://github.com/daft-engine/daft-mmops"
+Documentation = "https://github.com/daft-engine/daft-mmops/blob/main/docs/operator-development.md"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+pythonpath = [".", "src"]
+testpaths = ["tests"]
